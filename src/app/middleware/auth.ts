@@ -3,6 +3,13 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 import env from "../../config/env.js"
 
 /**
+ * Helper utility to verify token roles.
+ */
+const checkUserRole = (decodedRole: string, requiredRoles: string[]) => {
+  return requiredRoles.includes(decodedRole);
+};
+
+/**
  * Authentication and authorization middleware.
  * Verifies JWT token and checks user roles.
  */
@@ -21,7 +28,7 @@ const auth =(...requiredRoles:string[])=>{
 
             req.user=decoded
 
-            if(requiredRoles.length && !requiredRoles.includes(decoded.role)){
+            if(requiredRoles.length && !checkUserRole(decoded.role, requiredRoles)){
                 throw new Error('forbidden access')
             }
             next()
