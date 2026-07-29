@@ -4,10 +4,11 @@ model User {
   email           String   @unique
   password        String
   otp             String?
+  role            Role     @default(user)
+  orders          Order[]
   isVerified      Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   @@map("users")
 }
-
