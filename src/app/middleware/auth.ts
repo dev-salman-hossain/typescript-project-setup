@@ -2,6 +2,10 @@ import { NextFunction, Request, Response } from "express"
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import env from "../../config/env.js"
 
+/**
+ * Authentication and authorization middleware.
+ * Verifies JWT token and checks user roles.
+ */
 const auth =(...requiredRoles:string[])=>{
     return async(req:Request, res:Response, next:NextFunction)=>{
         try {
