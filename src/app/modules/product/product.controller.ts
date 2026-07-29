@@ -4,6 +4,10 @@ import { productService } from "./product.service.js";
 import sendResponse from "../../../utils/sendResponse.js";
 import httpStatus from "http-status";
 
+/**
+ * Controller for creating a new product.
+ * Returns created product details.
+ */
 const createProduct=catchAsync(
     async(req:Request, res:Response)=>{
         const user=req.body
