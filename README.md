@@ -312,3 +312,4 @@ Example:
 Mohammad Salman Hossain
 
 Junior MERN Stack Developer
+\n## Product Endpoints\n- `POST /api/v1/products` - Create a new product. Requires authentication.\n
