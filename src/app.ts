@@ -10,7 +10,6 @@ import globalError from "./app/middleware/globalError.js";
 const app : Application = express();
 
 
-
 app.use(cors());
 
 app.use(cookieParser());
@@ -24,6 +23,6 @@ app.get("/", (req, res) => {
 });
 
 app.use(notFound);
-app.use(globalError)
+app.use(globalError);
 
 export default app;
