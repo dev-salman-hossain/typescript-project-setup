@@ -1,3 +1,4 @@
+// Product Model definitions
 model Product {
   id          String      @id @default(cuid())
 

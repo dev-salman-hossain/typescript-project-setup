@@ -1,3 +1,4 @@
+// Order & OrderItem Model definitions
 model Order {
   id          String        @id @default(cuid())
 
