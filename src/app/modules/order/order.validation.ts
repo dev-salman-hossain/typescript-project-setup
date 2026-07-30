@@ -12,3 +12,9 @@ export const createOrderValidationSchema = z.object({
     totalPrice: z.number().positive()
   })
 });
+
+export const updateOrderStatusValidationSchema = z.object({
+  body: z.object({
+    status: z.enum(['pending', 'accepted', 'cancelled'])
+  })
+});
