@@ -313,3 +313,8 @@ Mohammad Salman Hossain
 
 Junior MERN Stack Developer
 \n## Product Endpoints\n- `POST /api/v1/products` - Create a new product. Requires authentication.\n
+## Order Endpoints
+- `POST /api/v1/orders` - Place a new order.
+- `GET /api/v1/orders/my-orders` - Retrieve your orders.
+- `GET /api/v1/orders/:orderId` - View order details.
+- `PATCH /api/v1/orders/:orderId/status` - Update order status (Admin only).
