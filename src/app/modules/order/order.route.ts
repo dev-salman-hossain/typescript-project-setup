@@ -22,6 +22,12 @@ router.get(
   orderController.getUserOrders
 );
 
+router.get(
+  '/:orderId',
+  auth('user', 'customer', 'admin'),
+  orderController.getSingleOrder
+);
+
 router.patch(
   '/:orderId/status',
   auth('admin'),
