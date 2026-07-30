@@ -13,6 +13,10 @@ const moduleRoutes = [
     path: "/products",
     route: ProductRoutes,
   },
+  // {
+  //   path: "/orders",
+  //   route: OrderRoutes
+  // }
 ];
 
 moduleRoutes.forEach((route) => {
