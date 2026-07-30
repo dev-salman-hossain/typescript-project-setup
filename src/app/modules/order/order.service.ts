@@ -2,7 +2,6 @@ import { prisma } from '../../../lib/prisma.js';
 import { TOrder } from './order.interface.js';
 import { TOrderStatus } from './order.constant.js';
 
-// Status helper
 const isCancelled = (status: TOrderStatus) => status === 'cancelled';
 
 const verifyStock = async (tx: any, productId: string, quantity: number) => {
@@ -17,12 +16,11 @@ const verifyStock = async (tx: any, productId: string, quantity: number) => {
 };
 
 const createOrder = async (userId: string, payload: Omit<TOrder, 'userId'>): Promise<any> => {
-  const result = await prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx) => {
     for (const item of payload.items) {
       await verifyStock(tx, item.productId, item.quantity);
     }
-
-    const order = await tx.order.create({
+    return await tx.order.create({
       data: {
         userId,
         totalPrice: payload.totalPrice,
@@ -38,9 +36,7 @@ const createOrder = async (userId: string, payload: Omit<TOrder, 'userId'>): Pro
         items: true
       }
     });
-    return order;
   });
-  return result;
 };
 
 const getOrdersByUserId = async (userId: string): Promise<any[]> => {
@@ -52,7 +48,7 @@ const getOrdersByUserId = async (userId: string): Promise<any[]> => {
 
 const updateOrderStatus = async (orderId: string, status: TOrderStatus): Promise<any> => {
   if (isCancelled(status)) {
-    // Perform cancellation tasks here
+    // Log or trace cancellation
   }
   return await prisma.order.update({
     where: { id: orderId },
