@@ -13,8 +13,7 @@ const verifyStock = async (tx: any, productId: string, quantity: number) => {
   });
 };
 
-const createOrder = async (userId: string, payload: Omit<TOrder, 'userId'>) => {
-  // DB Transaction block
+const createOrder = async (userId: string, payload: Omit<TOrder, 'userId'>): Promise<any> => {
   const result = await prisma.$transaction(async (tx) => {
     for (const item of payload.items) {
       await verifyStock(tx, item.productId, item.quantity);
@@ -41,14 +40,14 @@ const createOrder = async (userId: string, payload: Omit<TOrder, 'userId'>) => {
   return result;
 };
 
-const getOrdersByUserId = async (userId: string) => {
+const getOrdersByUserId = async (userId: string): Promise<any[]> => {
   return await prisma.order.findMany({
     where: { userId },
     include: { items: true }
   });
 };
 
-const updateOrderStatus = async (orderId: string, status: TOrderStatus) => {
+const updateOrderStatus = async (orderId: string, status: TOrderStatus): Promise<any> => {
   return await prisma.order.update({
     where: { id: orderId },
     data: { status }
