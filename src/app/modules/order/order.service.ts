@@ -14,7 +14,6 @@ const verifyStock = async (tx: any, productId: string, quantity: number) => {
 
 const createOrder = async (userId: string, payload: Omit<TOrder, 'userId'>) => {
   const result = await prisma.$transaction(async (tx) => {
-    // Verify and decrement stock for each item
     for (const item of payload.items) {
       await verifyStock(tx, item.productId, item.quantity);
     }
@@ -40,6 +39,14 @@ const createOrder = async (userId: string, payload: Omit<TOrder, 'userId'>) => {
   return result;
 };
 
+const getOrdersByUserId = async (userId: string) => {
+  return await prisma.order.findMany({
+    where: { userId },
+    include: { items: true }
+  });
+};
+
 export const orderService = {
-  createOrder
+  createOrder,
+  getOrdersByUserId
 };
