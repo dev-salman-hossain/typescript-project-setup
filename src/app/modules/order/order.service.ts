@@ -14,6 +14,7 @@ const verifyStock = async (tx: any, productId: string, quantity: number) => {
 };
 
 const createOrder = async (userId: string, payload: Omit<TOrder, 'userId'>) => {
+  // DB Transaction block
   const result = await prisma.$transaction(async (tx) => {
     for (const item of payload.items) {
       await verifyStock(tx, item.productId, item.quantity);
