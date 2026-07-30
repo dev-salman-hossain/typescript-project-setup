@@ -54,8 +54,16 @@ const updateOrderStatus = async (orderId: string, status: TOrderStatus): Promise
   });
 };
 
+const getSingleOrder = async (orderId: string): Promise<any> => {
+  return await prisma.order.findUnique({
+    where: { id: orderId },
+    include: { items: true }
+  });
+};
+
 export const orderService = {
   createOrder,
   getOrdersByUserId,
-  updateOrderStatus
+  updateOrderStatus,
+  getSingleOrder
 };
