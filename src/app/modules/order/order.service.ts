@@ -2,6 +2,9 @@ import { prisma } from '../../../lib/prisma.js';
 import { TOrder } from './order.interface.js';
 import { TOrderStatus } from './order.constant.js';
 
+// Status helper
+const isCancelled = (status: TOrderStatus) => status === 'cancelled';
+
 const verifyStock = async (tx: any, productId: string, quantity: number) => {
   const product = await tx.product.findUnique({ where: { id: productId } });
   if (!product || product.stock < quantity) {
@@ -48,6 +51,9 @@ const getOrdersByUserId = async (userId: string): Promise<any[]> => {
 };
 
 const updateOrderStatus = async (orderId: string, status: TOrderStatus): Promise<any> => {
+  if (isCancelled(status)) {
+    // Perform cancellation tasks here
+  }
   return await prisma.order.update({
     where: { id: orderId },
     data: { status }
