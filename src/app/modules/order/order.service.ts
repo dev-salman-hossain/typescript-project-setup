@@ -1,5 +1,6 @@
 import { prisma } from '../../../lib/prisma.js';
 import { TOrder } from './order.interface.js';
+import { TOrderStatus } from './order.constant.js';
 
 const verifyStock = async (tx: any, productId: string, quantity: number) => {
   const product = await tx.product.findUnique({ where: { id: productId } });
@@ -46,7 +47,15 @@ const getOrdersByUserId = async (userId: string) => {
   });
 };
 
+const updateOrderStatus = async (orderId: string, status: TOrderStatus) => {
+  return await prisma.order.update({
+    where: { id: orderId },
+    data: { status }
+  });
+};
+
 export const orderService = {
   createOrder,
-  getOrdersByUserId
+  getOrdersByUserId,
+  updateOrderStatus
 };
