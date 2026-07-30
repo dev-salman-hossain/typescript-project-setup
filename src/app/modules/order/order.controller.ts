@@ -45,8 +45,21 @@ const updateOrderStatus = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
+  const { orderId } = req.params;
+  const result = await orderService.getSingleOrder(orderId);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Order details retrieved successfully',
+    data: result
+  });
+});
+
 export const orderController = {
   createOrder,
   getUserOrders,
-  updateOrderStatus
+  updateOrderStatus,
+  getSingleOrder
 };
