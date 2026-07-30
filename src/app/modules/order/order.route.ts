@@ -13,4 +13,10 @@ router.post(
   orderController.createOrder
 );
 
+router.get(
+  '/my-orders',
+  auth('user', 'customer'),
+  orderController.getUserOrders
+);
+
 export const OrderRoutes = router;
