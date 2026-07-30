@@ -47,7 +47,12 @@ const updateOrderStatus = catchAsync(async (req: Request, res: Response) => {
 
 const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
   const { orderId } = req.params;
+  const user = req.user;
   const result = await orderService.getSingleOrder(orderId);
+
+  if (result.userId !== user.id && user.role !== 'admin') {
+    throw new Error('Forbidden access to this order');
+  }
 
   sendResponse(res, {
     success: true,
