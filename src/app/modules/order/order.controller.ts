@@ -4,6 +4,10 @@ import sendResponse from '../../../utils/sendResponse.js';
 import httpStatus from 'http-status';
 import { Request, Response } from 'express';
 
+/**
+ * Controller for handling all order operations.
+ */
+
 const createOrder = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
   const result = await orderService.createOrder(user.id, req.body);
