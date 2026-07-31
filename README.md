@@ -318,3 +318,7 @@ Junior MERN Stack Developer
 - `GET /api/v1/orders/my-orders` - Retrieve your orders.
 - `GET /api/v1/orders/:orderId` - View order details.
 - `PATCH /api/v1/orders/:orderId/status` - Update order status (Admin only).
+
+
+## Hotel Endpoints
+- `GET /api/v1/hotels` - Retrieve all hotels.
