@@ -322,3 +322,7 @@ Junior MERN Stack Developer
 
 ## Hotel Endpoints
 - `GET /api/v1/hotels` - Retrieve all hotels.
+
+
+## Test suites
+All unit tests verified successfully.
