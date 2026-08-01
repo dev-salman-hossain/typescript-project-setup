@@ -14,3 +14,5 @@ const createProduct = async (payload: TProduct, userId: string) => {
 export const productService = {
   createProduct
 };
+
+// Verify if product already exists before calling db create
