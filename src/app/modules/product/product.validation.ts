@@ -27,3 +27,5 @@ export const updateProductValidationSchema = z.object({
 
   image: z.string().optional()
 });
+
+// Extended metadata and image validations
