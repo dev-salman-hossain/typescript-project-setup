@@ -69,3 +69,5 @@ export const orderService = {
   updateOrderStatus,
   getSingleOrder
 };
+
+// Query optimization: fetch user data efficiently
