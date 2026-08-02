@@ -1,18 +1,27 @@
-import { Response } from "express";
+﻿import { Response } from "express";
 
-const success = (
-  res: Response,
-  data: any,
-  message: string,
-  statusCode: number = 200,
-) => {
-  return res.status(statusCode).json({
-    success: true,
-    data: data,
-    message: message,
-  });
-};
+interface ApiResponseOptions {
+  res: Response;
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data?: unknown;
+  meta?: unknown;
+}
 
-export const ApiResponse = {
+// Standardized API response sender
+export const sendResponse = ({
+  res,
+  statusCode,
   success,
+  message,
+  data,
+  meta,
+}: ApiResponseOptions): void => {
+  res.status(statusCode).json({
+    success,
+    message,
+    meta: meta || null,
+    data: data || null,
+  });
 };
