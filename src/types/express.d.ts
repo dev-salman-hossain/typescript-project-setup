@@ -7,10 +7,11 @@ declare global {
       user?: JwtPayload & {
         id: string;
         email: string;
-        role: string;
+        role: "user" | "admin" | "superAdmin";
         iat?: number;
         exp?: number;
       };
+      requestId?: string;
     }
   }
 }
