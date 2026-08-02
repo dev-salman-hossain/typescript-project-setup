@@ -1,6 +1,6 @@
 ﻿interface PaginateOptions {
-  page?: number;
-  limit?: number;
+  page?: number | string;
+  limit?: number | string;
 }
 
 interface PaginateResult {
@@ -11,8 +11,8 @@ interface PaginateResult {
 
 // Calculate pagination parameters from query options
 export const getPaginationParams = (options: PaginateOptions): PaginateResult => {
-  const page = Number(options.page) || 1;
-  const limit = Number(options.limit) || 10;
+  const page = Math.max(1, Number(options.page) || 1);
+  const limit = Math.min(100, Math.max(1, Number(options.limit) || 10));
   const skip = (page - 1) * limit;
 
   return { skip, limit, page };
